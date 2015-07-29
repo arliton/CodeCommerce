@@ -36,3 +36,9 @@ Route::group(['prefix' => 'admin'], function() {
         Route::get('destroy/{id}', ['as' => 'admin.products.destroy', 'uses' => 'AdminProductsController@destroy']);
     });
 });
+
+Route::get('home', 'HomeController@index');
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);

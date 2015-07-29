@@ -1,21 +1,42 @@
-<div class="container">
-    <h1>Lista de Produtos</h1>
+@extends('app')
 
-    <table class="table" border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Preço</th>
-        </tr>
+@section('content')
+    <div class="container">
+        <h1>Products</h1>
 
-        @foreach($products as $product)
+        <br>
+        <a href="{{ route('admin.products.create') }}" class="btn btn-primary">New Product</a>
+        <br><br>
+
+        <table class="table">
             <tr>
-                <td>{{ $product->id }}</td>
-                <td>{{ $product->name }}</td>
-                <td>{{ $product->description }}</td>
-                <td>{{ $product->price }}</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Featured</th>
+                <th>Recommended</th>
+                <th>Action</th>
             </tr>
-        @endforeach
-    </table>
-</div>
+
+            @foreach($produtos as $product)
+                <tr>
+                    <td>{{ $product->id }}</td>
+                    <td>{{ $product->name }}</td>
+                    <td>{{ str_limit($product->description, $limit = 50, $end = '...') }}</td>
+                    <td>{{ $product->price }}</td>
+
+                    <td>{!! Form::checkbox('featured', null, $product->featured, array('disabled')) !!}</td>
+                    <td>{!! Form::checkbox('recommended', null, $product->recommended, array('disabled')) !!}</td>
+
+                    <td>
+                        <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}" class="btn btn-success">Edit</a>
+                        <a href="{{ route('admin.products.destroy', ['id' => $product->id]) }}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+
+        {!! $produtos->render() !!}
+    </div>
+@endsection

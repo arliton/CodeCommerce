@@ -19,8 +19,46 @@ class AdminProductsController extends Controller
 
     public function index()
     {
-        $products = $this->productModel->all();
+        $produtos = $this->productModel->paginate(10);
 
-        return view('products.index', compact('products'));
+        return view('products.index', compact('produtos'));
     }
+
+    public function create()
+    {
+        return view('products.create');
+    }
+
+    public function store(Requests\ProductRequest $request)
+    {
+        $input = $request->all();
+
+        $product = $this->productModel->fill($input);
+
+        $product->save();
+
+        return redirect()->route('admin.products.index');
+    }
+
+    public function edit($id)
+    {
+        $product = $this->productModel->find($id);
+
+        return view('products.edit', compact('product'));
+    }
+
+    public function update(Requests\ProductRequest $request, $id)
+    {
+        $this->productModel->find($id)->update($request->all());
+
+        return redirect()->route('admin.products.index');
+    }
+
+    public function destroy($id)
+    {
+        $this->productModel->find($id)->delete();
+
+        return redirect()->route('admin.products.index');
+    }
+
 }
