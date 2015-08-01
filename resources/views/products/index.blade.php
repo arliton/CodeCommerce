@@ -16,6 +16,7 @@
                 <th>Price</th>
                 <th>Featured</th>
                 <th>Recommended</th>
+                <th>Category</th>
                 <th>Action</th>
             </tr>
 
@@ -28,6 +29,8 @@
 
                     <td>{!! Form::checkbox('featured', null, $product->featured, array('disabled')) !!}</td>
                     <td>{!! Form::checkbox('recommended', null, $product->recommended, array('disabled')) !!}</td>
+
+                    <td>{{ $product->category->name }}</td>
 
                     <td>
                         <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}" class="btn btn-success">Edit</a>
