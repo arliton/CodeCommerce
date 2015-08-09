@@ -9,6 +9,7 @@ use CodeCommerce\Http\Controllers\Controller;
 use CodeCommerce\Product;
 use CodeCommerce\Category;
 use CodeCommerce\ProductImage;
+use CodeCommerce\Tag;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
@@ -39,9 +40,26 @@ class AdminProductsController extends Controller
     {
         $input = $request->all();
 
+        $tags_input = array_map('trim', explode(',', $input['tags']));
+
+        $array_new_tags = array();
+
+        foreach($tags_input as $tag) {
+
+            if (!empty($tag)) {
+                if (!in_array($tag, Tag::lists('name')->toArray())) {
+                    Tag::create(['name' => $tag]);
+                }
+
+                array_push($array_new_tags, Tag::lists('id', 'name')->toArray()[$tag]);
+            }
+        }
+
         $product = $this->productModel->fill($input);
 
         $product->save();
+
+        $product->tags()->sync($array_new_tags);
 
         return redirect()->route('admin.products.index');
     }
@@ -52,12 +70,37 @@ class AdminProductsController extends Controller
 
         $product = $this->productModel->find($id);
 
-        return view('products.edit', compact('product', 'categories'));
+        $tags = array();
+        for($i = 0; $i < count($product->tags) ; $i++) {
+            array_push($tags, $product->tags[$i]->name);
+        }
+        $tags = implode(', ', $tags);
+
+        return view('products.edit', compact('product', 'categories', 'tags'));
     }
 
     public function update(Requests\ProductRequest $request, $id)
     {
-        $this->productModel->find($id)->update($request->all());
+        $input = $request->all();
+
+        $tags_update = array_map('trim', explode(',', $input['tags']));
+
+        $array_update_tags = array();
+
+        foreach($tags_update as $tag) {
+
+            if (!empty($tag)) {
+                if (!in_array($tag, Tag::lists('name')->toArray())) {
+                    Tag::create(['name' => $tag]);
+                }
+
+                array_push($array_update_tags, Tag::lists('id', 'name')->toArray()[$tag]);
+            }
+        }
+
+        $this->productModel->find($id)->update($input);
+
+        $this->productModel->find($id)->tags()->sync($array_update_tags);
 
         return redirect()->route('admin.products.index');
     }

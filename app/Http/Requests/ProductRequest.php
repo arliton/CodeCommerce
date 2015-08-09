@@ -26,7 +26,8 @@ class ProductRequest extends Request
         return [
             'name' => 'required|min:5',
             'description' => 'required',
-            'price' => 'regex:/^\d*(\.\d{2})?$/'
+            'price' => 'regex:/^\d*(\.\d{2})?$/',
+            'tags' => 'min:3|regex:/^([0-9A-Za-z_ -]+)(,[0-9A-Za-z_ -]+)*$/'
         ];
     }
 }
