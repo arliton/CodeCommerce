@@ -30,4 +30,16 @@ class Product extends Model
         return $this->belongsToMany('CodeCommerce\Tag');
     }
 
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', '=', 1)
+            ->orWhere('featured', '=', "on");
+    }
+
+    public function scopeRecommended($query)
+    {
+        return $query->where('recommended', '=', 1)
+            ->orWhere('recommended', '=', "on");
+    }
+
 }

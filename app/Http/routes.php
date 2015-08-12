@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::pattern('id', '[0-9]+');
+
+Route::get('/', 'StoreController@index');
+Route::get('categories/{id}/products', 'StoreController@index');
 
 Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'categories'], function() {
