@@ -15,26 +15,21 @@ elixir(function(mix) {
     // mix.sass('app.scss');
 
     mix.styles([
-        'animate.css',
-        'app.css',
         'bootstrap.min.css',
         'font-awesome.min.css',
-        'main.css',
         'prettyPhoto.css',
-        'price-range.css',
+        'animate.css',
+        'main.css',
         'responsive.css'
     ], 'public/css/all.css');
 
     mix.scripts([
-        'bootstrap.min.js',
-        'contact.js',
-        'gmaps.js',
-        'html5shiv.js',
         'jquery.js',
-        'jquery.prettyPhoto.js',
+        'bootstrap.min.js',
         'jquery.scrollUp.min.js',
-        'main.js',
-        'price-range.js'
+        'price-range.js',
+        'jquery.prettyPhoto.js',
+        'main.js'
     ], 'public/js/all.js');
 
     mix.version(['css/all.css', 'js/all.js']);

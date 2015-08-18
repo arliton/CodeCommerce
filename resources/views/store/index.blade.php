@@ -4,10 +4,6 @@
     @include('store.categories')
 @stop
 
-@section('content')
-    @if(isset($products))
-        @include('store.products')
-    @else
-        @include('store.destRec')
-    @endif
+@section('products')
+    @include('store.destRec')
 @stop

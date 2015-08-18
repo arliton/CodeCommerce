@@ -34,7 +34,7 @@
 
                     <td>
                         <a href="{{ route('admin.products.edit', ['id' => $product->id]) }}" class="btn btn-success">Edit</a>
-                        <a href="{{ route('admin.products.images', ['id' => $product->id]) }}" class="btn btn-primary">Images</a>
+                        <a href="{{ route('admin.products.images', ['id' => $product->id]) }}" class="btn btn-info">Images</a>
                         <a href="{{ route('admin.products.destroy', ['id' => $product->id]) }}" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>

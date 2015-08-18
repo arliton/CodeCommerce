@@ -7,7 +7,7 @@
 @section('products')
     <div class="col-sm-9 padding-right">
         <div class="features_items"><!--products by category-->
-            <h2 class="title text-center">Produtos Categoria: {{ $categorie_name }}</h2>
+            <h2 class="title text-center">Produtos Tag: {{ $tag_name }}</h2>
 
 
             @foreach($products as $product)
@@ -18,9 +18,9 @@
                             <div class="productinfo text-center">
 
                                 @if(count($product->images))
-                                    <img src="{{ url('uploads/'.$product->images->first()->id . '.' .$product->images->first()->extension) }}" width="200" />
+                                    <img src="{{ url('uploads/'.$product->images->first()->id . '.' .$product->images->first()->extension) }}" alt="" width="200" />
                                 @else
-                                    <img src="{{ url('images/no-img.jpg') }}" width="200" />
+                                    <img src="{{ url('images/no-img.jpg') }}" alt="" width="200" />
                                 @endif
 
                                 <h2>R$ {{ $product->price }}</h2>

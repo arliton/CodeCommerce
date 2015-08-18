@@ -7,9 +7,7 @@
     <meta name="author" content="">
     <title>Home | E-Shop</title>
 
-
     <link href="{{ elixir('css/all.css') }}" rel="stylesheet">
-
 
 </head><!--/head-->
 
@@ -54,7 +52,7 @@
                             <li><a href="#"><i class="fa fa-user"></i> Minha conta</a></li>
                             <li><a href="#"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="#"><i class="fa fa-shopping-cart"></i> Carrinho</a></li>
-                            <li><a href="http://localhost:8000/auth/login"><i class="fa fa-lock"></i> Login</a></li>
+                            <li><a href="{{ url('auth/login') }}"><i class="fa fa-lock"></i> Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -79,11 +77,10 @@
                             <li><a href="/" class="active">Home</a></li>
                             <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    <li><a href="#">Products</a></li>
-                                    <li><a href="#">Product Details</a></li>
+                                    <li><a href="{{ route('store.index') }}">Products</a></li>
                                     <li><a href="#">Checkout</a></li>
                                     <li><a href="#">Cart</a></li>
-                                    <li><a href="http://localhost:8000/auth/login">Login</a></li>
+                                    <li><a href="{{ url('auth/login') }}">Login</a></li>
                                 </ul>
                             </li>
 
@@ -101,15 +98,13 @@
     </div><!--/header-bottom-->
 </header><!--/header-->
 
-
-
 <section>
     <div class="container">
         <div class="row">
 
             @yield('categories')
 
-            @yield('content')
+            @yield('products')
 
         </div>
     </div>
@@ -125,9 +120,6 @@
 
 <footer id="footer"><!--Footer-->
 
-
-
-
     <div class="footer-bottom">
         <div class="container">
             <div class="row">
@@ -138,9 +130,7 @@
 
 </footer><!--/Footer-->
 
-
 <script src="{{ elixir('js/all.js') }}"></script>
-
 
 </body>
 </html>

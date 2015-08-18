@@ -13,8 +13,10 @@
 
 Route::pattern('id', '[0-9]+');
 
-Route::get('/', 'StoreController@index');
-Route::get('categories/{id}/products', 'StoreController@index');
+Route::get('/', ['as' => 'store.index', 'uses' => 'StoreController@index']);
+Route::get('categories/{id}/products', ['as' => 'store.category', 'uses' => 'StoreController@category']);
+Route::get('products/{id}/details', ['as' => 'store.product', 'uses' => 'StoreController@product']);
+Route::get('tags/{id}/products', ['as' => 'store.tags', 'uses' => 'StoreController@tags']);
 
 Route::group(['prefix' => 'admin'], function() {
     Route::group(['prefix' => 'categories'], function() {
